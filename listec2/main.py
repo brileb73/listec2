@@ -57,10 +57,10 @@ def get_args():
         help='Force prompt for updating config (forces explicitly set profile to be ignored)'
     )
     argsparser.add_argument(
-        'search_regex',
+        'filter_string',
         nargs='?',
         default='',
-        help='Regex for filtering servers'
+        help='Filter for specific string in server names'
     )
     return argsparser.parse_args()
 
@@ -122,12 +122,12 @@ def main():
     for profile in profiles:
         filtered_instances = get_ec2_reservations(profile, running_filter)
         for reservation in filtered_instances:
-            # Filter for instances with a 'Name' tag that matches search_regex
+            # Filter for instances with a 'Name' tag that matches filter_string
             instances = [
                 instance for instance in reservation['Instances']
                 if [
                     tag for tag in instance['Tags']
-                    if tag['Key'] == 'Name' and args.search_regex in tag['Value']
+                    if tag['Key'] == 'Name' and args.filter_string in tag['Value']
                 ]
             ]
             # Add matching instances to matching_list

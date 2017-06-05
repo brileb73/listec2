@@ -9,12 +9,12 @@ To install from source, run in the root of the repo::
 
 Usage::
 
-  usage: listec2 [-h] [-p PROFILE] [-x] [--update-config] [search_regex]
+  usage: listec2 [-h] [-p PROFILE] [-x] [--update-config] [filter_string]
   
   List running AWS EC2 servers
   
   positional arguments:
-    search_regex          Regex for filtering servers
+    filter_string         Filter for specific string in server names
   
   optional arguments:
     -h, --help            show this help message and exit
