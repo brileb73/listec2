@@ -1,0 +1,13 @@
+# Python
+*.py[cod]
+__pycache__/
+dist/
+build/
+*.egg-info/
+*.egg
+
+# Virtualenv
+venv
+
+# Misc
+.DS_Store
