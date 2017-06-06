@@ -33,8 +33,7 @@ def sort_by_name(list_to_sort):
     """
     return sorted(
         list_to_sort,
-        cmp=lambda x, y: cmp(x.lower(), y.lower()),
-        key=lambda k: k['Name']
+        key=lambda k: k['Name'].lower()
     )
 
 
