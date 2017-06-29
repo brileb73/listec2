@@ -137,7 +137,8 @@ def main():
                     'PublicDnsName': instance['PublicDnsName'] if instance['PublicDnsName']
                                      else 'No Public DNS',
                     'PrivateIpAddress': instance['PrivateIpAddress'] if instance['PrivateIpAddress']
-                                        else 'No Private IP'
+                                        else 'No Private IP',
+                    'ImageId': instance['ImageId'] if instance['ImageId'] else 'No Image Id'
                 })
 
         # If flag for full run not added, exit one there instances are found
