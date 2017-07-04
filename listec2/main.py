@@ -11,6 +11,7 @@ import boto3
 from tabulate import tabulate
 from six.moves import configparser
 from six.moves import input
+from botocore.exceptions import ProfileNotFound
 
 SETTINGS_FILE = os.path.expanduser('~/.get_ips.ini')
 START_TIME = time.time()
@@ -82,7 +83,7 @@ def get_profiles(args):
         # Get default profiles from user
         try:
             profiles_input = input(
-                'Please enter space separated list of profiles to use (ex: bsp tj bst): '
+                'Please enter space separated list of profiles to use: '
             )
         except KeyboardInterrupt:
             # Avoid ugly stacktrace on ctrl-c in input
@@ -102,7 +103,11 @@ def get_ec2_reservations(profile, running_filter):
     """
     Get all instance reservations for a profile
     """
-    ec2_client = boto3.Session(profile_name=profile).client('ec2')
+    try:
+        ec2_client = boto3.Session(profile_name=profile).client('ec2')
+    except ProfileNotFound:
+        print("Profile: %s not found" % profile, file=sys.stderr)
+        sys.exit(1)
     filtered_instances = ec2_client.describe_instances(Filters=running_filter)
     return filtered_instances['Reservations']
 
