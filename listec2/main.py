@@ -13,7 +13,7 @@ from six.moves import configparser
 from six.moves import input
 from botocore.exceptions import ProfileNotFound
 
-SETTINGS_FILE = os.path.expanduser('~/.get_ips.ini')
+SETTINGS_FILE = os.path.expanduser('~/.listec2.ini')
 START_TIME = time.time()
 
 
