@@ -129,7 +129,7 @@ def main():
             # Filter for instances with a 'Name' tag that matches filter_string
             instances = [
                 instance for instance in reservation['Instances']
-                if [
+                if instance.get('Tags') and [
                     tag for tag in instance['Tags']
                     if tag['Key'] == 'Name' and args.filter_string in tag['Value']
                 ]
@@ -139,9 +139,9 @@ def main():
                 matching_list.append({
                     'Name': [tag['Value'] for tag in instance['Tags'] if tag['Key'] == 'Name'][0],
                     'InstanceId': instance['InstanceId'],
-                    'PublicDnsName': instance['PublicDnsName'] if instance['PublicDnsName']
+                    'PublicDnsName': instance['PublicDnsName'] if instance.get('PublicDnsName')
                                      else 'No Public DNS',
-                    'PrivateIpAddress': instance['PrivateIpAddress'] if instance['PrivateIpAddress']
+                    'PrivateIpAddress': instance['PrivateIpAddress'] if instance.get('PrivateIpAddress')
                                         else 'No Private IP'
                 })
 
