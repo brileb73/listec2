@@ -141,7 +141,8 @@ def main():
                     'InstanceId': instance['InstanceId'],
                     'PublicDnsName': instance['PublicDnsName'] if instance.get('PublicDnsName')
                                      else 'No Public DNS',
-                    'PrivateIpAddress': instance['PrivateIpAddress'] if instance.get('PrivateIpAddress')
+                    'PrivateIpAddress': instance['PrivateIpAddress']
+                                        if instance.get('PrivateIpAddress')
                                         else 'No Private IP'
                 })
 
